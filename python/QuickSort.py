@@ -23,7 +23,7 @@ ruta_archivo = "C:\\Users\\jhord\\Downloads\\Examen grupal\\Datos\\DatosCargados
 lista_numeros = leer_datos_desde_archivo(ruta_archivo)
 
 # Definir cuántos datos queremos probar (Ejemplo: 50)
-limite_datos = min(50, len(lista_numeros))  # Ajusta el tamaño si hay menos datos
+limite_datos = min(10000 , len(lista_numeros))  # Ajusta el tamaño si hay menos datos
 datos_a_ordenar = lista_numeros[:limite_datos]  # Tomar solo una parte de los datos
 
 # Medir el tiempo de ejecución del algoritmo de ordenamiento QuickSort
