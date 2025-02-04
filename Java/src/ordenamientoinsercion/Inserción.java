@@ -15,7 +15,7 @@ public class Inserción {
             return;
         }
 
-        int limiteDatos = Math.min(3000, listaNumeros.length);
+        int limiteDatos = Math.min(10000, listaNumeros.length);
         int[] datosAOrdenar = Arrays.copyOfRange(listaNumeros, 0, limiteDatos); // Tomar solo una parte de los datos
 
         long inicioTiempo = System.nanoTime();

@@ -12,7 +12,7 @@ import java.util.*;
  */
 public class OrdenamientoBurbuja {
     public static void main(String[] args) {
-        String rutaArchivo = "C:\\Users\\Giuliana Espinoza\\Documents\\Análisis de algoritmos\\DatosCargados.txt";
+        String rutaArchivo = "/home/jmhueran/Descargas/Examen_grupal/Datos/DatosCargados.txt";
         
         int[] listaNumeros = leerDatosDesdeArchivo(rutaArchivo);
         if (listaNumeros == null) {
@@ -20,7 +20,7 @@ public class OrdenamientoBurbuja {
             return;
         }
 
-        int limiteDatos = Math.min(2000, listaNumeros.length);
+        int limiteDatos = Math.min(10000, listaNumeros.length);
         int[] datosAOrdenar = Arrays.copyOfRange(listaNumeros, 0, limiteDatos); // Tomar solo una parte de los datos
 
         long inicioTiempo = System.nanoTime();

@@ -1,14 +1,14 @@
 import time
 
 def main():
-    ruta_archivo = "C:\\Users\\Giuliana Espinoza\\Documents\\Análisis de algoritmos\\DatosCargados.txt"
+    ruta_archivo = "/home/jmhueran/Descargas/Examen_grupal/Datos/DatosCargados.txt"
     
     lista_numeros = leer_datos_desde_archivo(ruta_archivo)
     if lista_numeros is None:
         print("Error al leer el archivo.")
         return
 
-    limite_datos = min(1000, len(lista_numeros))
+    limite_datos = min(10000, len(lista_numeros))
     datos_a_ordenar = lista_numeros[:limite_datos]  # Tomar solo una parte de los datos
 
     inicio_tiempo = time.time()
