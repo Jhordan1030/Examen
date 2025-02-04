@@ -17,7 +17,7 @@ def leer_datos_desde_archivo(ruta_archivo):
     return lista_numeros
 
 # Ruta del archivo en Fedora (ajusta según tu usuario)
-ruta_archivo = "/home/jmhueran/Descargas/Examen grupal/Datos/DatosCargados.txt"
+ruta_archivo = "/home/jmhueran/Descargas/Examen_grupal/Datos/DatosCargados.txt"
 
 # Leer los datos desde el archivo
 lista_numeros = leer_datos_desde_archivo(ruta_archivo)

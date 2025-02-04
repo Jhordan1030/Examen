@@ -19,9 +19,9 @@ def ordenar_por_seleccion(lista_datos):
 
     return lista_datos
 
-archivo_datos = "C:\\Users\\Marcelo Chiriboga\\Documentos\\Materias 5to Semestre - Software\\Análisis de Algoritmos\\Examen\\DatosCargados.txt"
+archivo_datos = "/home/jmhueran/Descargas/Examen_grupal/Datos/DatosCargados.txt";
 
-cantidad_datos_a_probar = 10000 
+cantidad_datos_a_probar = 10000
 
 numeros = leer_datos_del_archivo(archivo_datos, cantidad_datos_a_probar)
 
