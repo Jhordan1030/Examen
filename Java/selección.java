@@ -45,7 +45,7 @@ public class selección {
     }
     
     public static void main(String[] args) {
-        String archivoDatos = "C:\\Users\\Marcelo Chiriboga\\Documentos\\Materias 5to Semestre - Software\\Análisis de Algoritmos\\Examen\\DatosCargados.txt";
+        String archivoDatos = "/home/jmhueran/Descargas/Examen_grupal/Datos/DatosCargados.txt";
 
         int cantidadDatosAProbar = 10000;  
 
