@@ -18,32 +18,41 @@ public class selección {
         return datos; 
     }
 
-    public static List<Integer> ordenarPorSeleccion(List<Integer> listaDatos) {
-        int cantidadDatos = listaDatos.size();
+    public static List<Integer> ordenarPorSeleccion(List<Integer> lista) {
+        int cantidadDatos = lista.size();
         
+        // Algoritmo de ordenamiento por selección
         for (int indiceInicio = 0; indiceInicio < cantidadDatos - 1; indiceInicio++) {
             int indiceMinimo = indiceInicio;
             
+            // Buscar el índice del valor mínimo en el resto de la lista
             for (int indiceComparar = indiceInicio + 1; indiceComparar < cantidadDatos; indiceComparar++) {
-                if (listaDatos.get(indiceComparar) < listaDatos.get(indiceMinimo)) {
+                if (lista.get(indiceComparar) < lista.get(indiceMinimo)) {
                     indiceMinimo = indiceComparar;
                 }
             }
-
-            Collections.swap(listaDatos, indiceInicio, indiceMinimo);
-        }  
-        return listaDatos;
+            
+            // Intercambiar el valor en indiceInicio con el valor mínimo encontrado
+            if (indiceMinimo != indiceInicio) {
+                // Intercambiar los elementos en la lista
+                Integer temp = lista.get(indiceInicio);
+                lista.set(indiceInicio, lista.get(indiceMinimo));
+                lista.set(indiceMinimo, temp);
+            }
+        }
+        
+        return lista;  // Retornar la lista ordenada
     }
     
     public static void main(String[] args) {
-        String archivoDatos = "C:\\Users\\Marcelo Chiriboga\\Documentos\\Materias 5to Semestre - Software\\Análisis de Algoritmos\\Examen\\numeros_aleatorios.txt";
+        String archivoDatos = "C:\\Users\\Marcelo Chiriboga\\Documentos\\Materias 5to Semestre - Software\\Análisis de Algoritmos\\Examen\\DatosCargados.txt";
 
-        int cantidadDatosAProbar = 40;  
+        int cantidadDatosAProbar = 10000;  
 
         List<Integer> numeros = leerDatosDelArchivo(archivoDatos, cantidadDatosAProbar);
 
         long inicioTemporal = System.nanoTime();
-        List<Integer> listaOrdenada = ordenarPorSeleccion(numeros);  // Ordenar los datos
+        List<Integer> listaOrdenada = ordenarPorSeleccion(numeros); 
         long finTemporal = System.nanoTime();
 
         double tiempoTotalSegundos = (finTemporal - inicioTemporal) / 1_000_000_000.0;

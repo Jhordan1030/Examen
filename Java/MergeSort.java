@@ -1,75 +1,90 @@
 package Java;
 
 import java.io.*;
-import java.util.*;
 
 public class MergeSort {
 
-    public static List<Integer> leerDatosDelArchivo(String nombreArchivo, int cantidad) {
-        List<Integer> datos = new ArrayList<>();
+    public static int[] leerDatosDelArchivo(String nombreArchivo, int cantidad) {
+        int[] datos = new int[cantidad];
         try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
             String linea;
-            while ((linea = br.readLine()) != null && datos.size() < cantidad) {
-                datos.add(Integer.parseInt(linea.trim()));  
+            int i = 0;
+            while ((linea = br.readLine()) != null && i < cantidad) {
+                datos[i] = Integer.parseInt(linea.trim());  
+                i++;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return datos; 
+        return datos;  
     }
 
-    public static List<Integer> merge(List<Integer> listaIzquierda, List<Integer> listaDerecha) {
-        List<Integer> resultado = new ArrayList<>();
-        int i = 0, j = 0;
+    public static int[] merge(int[] izquierda, int[] derecha) {
+        int[] resultado = new int[izquierda.length + derecha.length];
+        int i = 0, j = 0, k = 0;
 
-        while (i < listaIzquierda.size() && j < listaDerecha.size()) {
-            if (listaIzquierda.get(i) < listaDerecha.get(j)) {
-                resultado.add(listaIzquierda.get(i));
+        while (i < izquierda.length && j < derecha.length) {
+            if (izquierda[i] < derecha[j]) {
+                resultado[k] = izquierda[i];
                 i++;
             } else {
-                resultado.add(listaDerecha.get(j));
+                resultado[k] = derecha[j];
                 j++;
             }
+            k++;
         }
 
-        // Si queda algún elemento en la lista izquierda o derecha, agregarlo
-        resultado.addAll(listaIzquierda.subList(i, listaIzquierda.size()));
-        resultado.addAll(listaDerecha.subList(j, listaDerecha.size()));
+        while (i < izquierda.length) {
+            resultado[k] = izquierda[i];
+            i++;
+            k++;
+        }
 
-        return resultado;
+        while (j < derecha.length) {
+            resultado[k] = derecha[j];
+            j++;
+            k++;
+        }
+
+        return resultado; 
     }
 
-    // Algoritmo de MergeSort
-    public static List<Integer> mergeSort(List<Integer> listaDatos) {
-        if (listaDatos.size() <= 1) {
-            return listaDatos;
+    public static int[] mergeSort(int[] arr, int inicio, int fin) {
+        if (fin - inicio <= 1) {
+            return new int[]{arr[inicio]}; 
         }
 
-        int mitad = listaDatos.size() / 2;
-        List<Integer> izquierda = mergeSort(listaDatos.subList(0, mitad)); 
-        List<Integer> derecha = mergeSort(listaDatos.subList(mitad, listaDatos.size())); 
-
+        int mitad = (inicio + fin) / 2;
+    
+        int[] izquierda = mergeSort(arr, inicio, mitad);
+    
+        int[] derecha = mergeSort(arr, mitad, fin);
+    
         return merge(izquierda, derecha);
-    }
+    } 
 
     public static void main(String[] args) {
+ 
+        String archivoDatos = "C:\\Users\\Marcelo Chiriboga\\Documentos\\Materias 5to Semestre - Software\\Análisis de Algoritmos\\Examen\\DatosCargados.txt";
 
-        String archivoDatos = "C:\\Users\\Marcelo Chiriboga\\Documentos\\Materias 5to Semestre - Software\\Análisis de Algoritmos\\Examen\\numeros_aleatorios.txt";
+        int cantidadDatosAProbar = 10000; 
 
-        int cantidadDatosAProbar = 40;  
+        int[] numeros = leerDatosDelArchivo(archivoDatos, cantidadDatosAProbar);
 
-        List<Integer> numeros = leerDatosDelArchivo(archivoDatos, cantidadDatosAProbar);
+        long inicioTemporizador = System.nanoTime();
+        int[] listaOrdenada = mergeSort(numeros, 0 ,cantidadDatosAProbar);
+        long finTemporizador = System.nanoTime();
 
-        long inicioTemporal = System.nanoTime();
-        List<Integer> listaOrdenada = mergeSort(numeros); 
-        long finTemporal = System.nanoTime();
-
-        double tiempoTotalSegundos = (finTemporal - inicioTemporal) / 1_000_000_000.0;
+        double tiempoTotalSegundos = (finTemporizador - inicioTemporizador) / 1_000_000_000.0;
 
         System.out.printf("Tiempo de ejecución para %d datos: %.3f segundos%n", cantidadDatosAProbar, tiempoTotalSegundos);
 
         if (cantidadDatosAProbar <= 50) {
-            System.out.println("Lista ordenada: " + listaOrdenada);
+            System.out.print("Lista ordenada: ");
+            for (int num : listaOrdenada) {
+                System.out.print( num + " | " );
+            }
+            System.out.println();
         }
     }
 }

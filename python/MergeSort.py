@@ -3,39 +3,49 @@ import time
 def leer_datos_del_archivo(nombre_archivo, cantidad):
     with open(nombre_archivo, "r") as archivo:
         datos = [int(linea.strip()) for linea in archivo] 
-    return datos[:cantidad] 
+    return datos[:cantidad]
 
 def merge(lista_izquierda, lista_derecha):
-    resultado = []
     i = 0
     j = 0
+    k = 0
+    resultado = [0] * (len(lista_izquierda) + len(lista_derecha)) 
+
     while i < len(lista_izquierda) and j < len(lista_derecha):
         if lista_izquierda[i] < lista_derecha[j]:
-            resultado.append(lista_izquierda[i])
+            resultado[k] = lista_izquierda[i]
             i += 1
         else:
-            resultado.append(lista_derecha[j])
+            resultado[k] = lista_derecha[j]
             j += 1
+        k += 1
     
-    resultado.extend(lista_izquierda[i:])
-    resultado.extend(lista_derecha[j:])
+    while i < len(lista_izquierda):
+        resultado[k] = lista_izquierda[i]
+        i += 1
+        k += 1
+
+    while j < len(lista_derecha):
+        resultado[k] = lista_derecha[j]
+        j += 1
+        k += 1
     
     return resultado
 
-# Algoritmo de MergeSort
-def merge_sort(lista_datos):
-    if len(lista_datos) <= 1:
-        return lista_datos
-
-    mitad = len(lista_datos) // 2
-    izquierda = merge_sort(lista_datos[:mitad]) 
-    derecha = merge_sort(lista_datos[mitad:])  
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    
+    mitad = len(arr) // 2
+    izquierda = merge_sort(arr[:mitad]) 
+    derecha = merge_sort(arr[mitad:])   
 
     return merge(izquierda, derecha)
 
-archivo_datos = "C:\\Users\\Marcelo Chiriboga\\Documentos\\Materias 5to Semestre - Software\\Análisis de Algoritmos\\Examen\\numeros_aleatorios.txt"
 
-cantidad_datos_a_probar = 40  
+archivo_datos = "C:\\Users\\Marcelo Chiriboga\\Documentos\\Materias 5to Semestre - Software\\Análisis de Algoritmos\\Examen\\DatosCargados.txt"
+
+cantidad_datos_a_probar = 10000  
 
 numeros = leer_datos_del_archivo(archivo_datos, cantidad_datos_a_probar)
 
