@@ -1,6 +1,7 @@
 package Java;
 
 import java.io.*;
+import java.util.Arrays;
 
 public class MergeSort {
 
@@ -59,13 +60,14 @@ public class MergeSort {
         int[] izquierda = mergeSort(arr, inicio, mitad);
     
         int[] derecha = mergeSort(arr, mitad, fin);
-    
-        return merge(izquierda, derecha);
+
+        // Aquí se ajusta para pasar el array 'derecha' con 'derecha-1' como un subarray
+        return merge(izquierda, Arrays.copyOfRange(derecha, 0, derecha.length - 1)); // Excluimos el último elemento de derecha
     } 
 
     public static void main(String[] args) {
  
-        String archivoDatos = "/home/jmhueran/Descargas/Examen_grupal/Datos/DatosCargados.txt";
+        String archivoDatos = "C:\\Users\\Marcelo Chiriboga\\Documentos\\Materias 5to Semestre - Software\\Análisis de Algoritmos\\Examen\\DatosCargados.txt";
 
         int cantidadDatosAProbar = 10000; 
 
