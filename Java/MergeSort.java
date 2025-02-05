@@ -23,32 +23,29 @@ public class MergeSort {
     public static int[] merge(int[] izquierda, int[] derecha) {
         int[] resultado = new int[izquierda.length + derecha.length];
         int i = 0, j = 0, k = 0;
-
-        while (i < izquierda.length && j < derecha.length) {
-            if (izquierda[i] < derecha[j]) {
+    
+        // Primer ciclo for para comparar y agregar elementos de izquierda y derecha
+        for (; i < izquierda.length; k++) {
+            if (j < derecha.length && izquierda[i] < derecha[j]) {
                 resultado[k] = izquierda[i];
                 i++;
-            } else {
+            } else if (j < derecha.length) {
                 resultado[k] = derecha[j];
                 j++;
+            } else {
+                resultado[k] = izquierda[i];
+                i++;
             }
-            k++;
         }
-
-        while (i < izquierda.length) {
-            resultado[k] = izquierda[i];
-            i++;
-            k++;
-        }
-
-        while (j < derecha.length) {
+    
+        // Segundo ciclo for para agregar elementos restantes de derecha
+        for (; j < derecha.length; k++) {
             resultado[k] = derecha[j];
             j++;
-            k++;
         }
-
-        return resultado; 
-    }
+    
+        return resultado;
+    }    
 
     public static int[] mergeSort(int[] arr, int inicio, int fin) {
         if (fin - inicio <= 1) {
