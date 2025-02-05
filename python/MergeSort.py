@@ -38,12 +38,14 @@ def merge_sort(arr):
     
     mitad = len(arr) // 2
     izquierda = merge_sort(arr[:mitad]) 
-    derecha = merge_sort(arr[mitad:])   
+    derecha = merge_sort(arr[mitad:])
 
-    return merge(izquierda, derecha)
+    # Excluimos el último elemento de 'derecha' al pasarla
+    return merge(izquierda, derecha[:-1])  # Excluimos el último elemento de 'derecha'
 
 
-archivo_datos = "/home/jmhueran/Descargas/Examen_grupal/Datos/DatosCargados.txt"
+
+archivo_datos = "C:\\Users\\Marcelo Chiriboga\\Documentos\\Materias 5to Semestre - Software\\Análisis de Algoritmos\\Examen\\DatosCargados.txt"
 
 cantidad_datos_a_probar = 10000  
 
